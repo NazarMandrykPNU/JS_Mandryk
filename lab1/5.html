@@ -1,0 +1,39 @@
+<html>
+<head>
+    <script>
+    function calculateSum() {
+        var x = parseFloat(document.getElementById("input_x").value);
+        var y = parseFloat(document.getElementById("input_y").value);
+        var resultElement = document.getElementById("result");
+
+        var sum = 0.0;
+        var to4nost = 0.001;
+        var cur = 0.0;
+
+        for (var i = 3; i <= 5; i++) {
+            var factorial = 1;
+            for (var j = 1; j <= i; j++) {
+                factorial *= j;
+            }
+            cur = Math.pow(-1, (i+1)) * (((Math.pow(x,2))-(Math.pow(y,3)) + 3) / factorial - 5*x);
+            sum += cur;
+        }
+
+        resultElement.innerHTML = "Результат: " + sum.toFixed(4);
+    }
+    </script>
+</head>
+<body>
+    <form>
+        <label for="input_x">x: </label>
+        <input type="text" id="input_x" value="10"><br>
+
+        <label for="input_y">y: </label>
+        <input type="text" id="input_y" value="-2"><br>
+
+        <input type="button" onClick="calculateSum();" value="Розрахувати"><br>
+
+        <p id="result"></p>
+    </form>
+</body>
+</html>

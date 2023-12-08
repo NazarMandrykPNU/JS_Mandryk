@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Parsing</title>
+</head>
+<body>
+
+  <form id="emailForm">
+    <label for="emailInput">Введіть e-mail:</label>
+    <input type="text" id="emailInput" name="emailInput">
+    <button type="button" onclick="parseEmail()">Розібрати</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function parseEmail() {
+      let email = document.getElementById('emailInput').value;
+      let regex = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)*$/i;
+      let matchResult = email.match(regex);
+      let resultDiv = document.getElementById('result');
+
+      resultDiv.innerHTML = ""; // Очистимо попередні результати
+
+      if (matchResult) {
+        resultDiv.innerHTML += "<p>Логін: " + matchResult[1] + "</p>";
+        resultDiv.innerHTML += "<p>Домен: " + matchResult[3] + "</p>";
+      } else {
+        resultDiv.innerHTML += "<p>Неправильний формат e-mail адреси.</p>";
+      }
+    }
+  </script>
+
+</body>
+</html>

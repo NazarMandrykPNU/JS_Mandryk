@@ -1,0 +1,66 @@
+
+<html>
+<head>
+    <style>
+
+        h1 {
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 5px;
+        }
+
+        input {
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Часовий об'єкт</h1>
+    <p>Поточний час:</p>
+    <p id="currentTime"></p>
+    <p>Змінити час:</p>
+    <input type="number" id="secondsInput" placeholder="Секунди">
+    <button onclick="changeTime('seconds')">Змінити секунди</button>
+    <br>
+    <input type="number" id="minutesInput" placeholder="Хвилини">
+    <button onclick="changeTime('minutes')">Змінити хвилини</button>
+    <br>
+    <input type="number" id="hoursInput" placeholder="Години">
+    <button onclick="changeTime('hours')">Змінити години</button>
+
+    <script>
+        const displayElement = document.getElementById("currentTime");
+        let currentTimeObject = new Date();
+
+        function displayTime() {
+            const hours = currentTimeObject.getHours();
+            const minutes = currentTimeObject.getMinutes();
+            const seconds = currentTimeObject.getSeconds();
+            displayElement.innerText = `${hours}:${minutes}:${seconds}`;
+        }
+
+        function changeTime(unit) {
+            const value = parseInt(document.getElementById(`${unit}Input`).value) || 0;
+            
+            if (unit === "seconds") {
+                currentTimeObject.setSeconds(currentTimeObject.getSeconds() + value);
+            } else if (unit === "minutes") {
+                currentTimeObject.setMinutes(currentTimeObject.getMinutes() + value);
+            } else if (unit === "hours") {
+                currentTimeObject.setHours(currentTimeObject.getHours() + value);
+            }
+
+            displayTime();
+        }
+
+        displayTime();
+    </script>
+</body>

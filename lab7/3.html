@@ -1,0 +1,52 @@
+
+<html>
+<body>
+
+  <label for="camelCaseInput">Введіть імена змінних у стилі Snake case:</label>
+  <input type="text" id="camelCaseInput">
+  <button onclick="toCamelCase()">toCamelCase</button>
+  <p id="result3_1"></p>
+
+  <label for="snakeCaseInput">Введіть імена змінних у стилі Camel case:</label>
+  <input type="text" id="snakeCaseInput">
+  <button onclick="toSnakeCase()">toSnakeCase</button>
+  <p id="result3_2"></p>
+
+  <label for="dateFormatInput">Введіть текст для заміни дат у форматі yyyy/mm/dd:</label>
+  <textarea id="dateFormatInput"></textarea>
+  <button onclick="replaceDateFormats()">Замінити дати</button>
+  <p id="result3_3"></p>
+
+  <script>
+    function toCamelCase() {
+      var inputArray = document.getElementById('camelCaseInput').value.split(', ');
+      var outputArray = inputArray.map(function(variable) {
+        return variable.replace(/_([a-z])/g, function(match, group1) {
+          return group1.toUpperCase();
+        });
+      });
+
+      document.getElementById('result3_1').innerHTML = "3.1:<br>Вхідний масив: " + inputArray.join(', ') + "<br>Вихідний масив: " + outputArray.join(', ');
+    }
+
+    function toSnakeCase() {
+      var inputArray = document.getElementById('snakeCaseInput').value.split(', ');
+      var outputArray = inputArray.map(function(variable) {
+        return variable.replace(/([A-Z])/g, function(match) {
+          return '_' + match.toLowerCase();
+        });
+      });
+
+      document.getElementById('result3_2').innerHTML = "3.2:<br>Вхідний масив: " + inputArray.join(', ') + "<br>Вихідний масив: " + outputArray.join(', ');
+    }
+
+    function replaceDateFormats() {
+      var inputText = document.getElementById('dateFormatInput').value;
+      var outputText = inputText.replace(/(\d{4})\/(\d{2})\/(\d{2})/g, "$3.$2.$1");
+
+      document.getElementById('result3_3').innerHTML = "3.3: " + outputText;
+    }
+  </script>
+
+</body>
+</html>

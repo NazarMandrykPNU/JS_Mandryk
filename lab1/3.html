@@ -1,0 +1,16 @@
+<html>
+<head>
+<script>
+function fun(a) {
+  main_form.t_res.value = a;
+}
+
+</script>
+</head>
+<body onLoad="fun('Відбулось завантаження сторінки');">
+  <form id="main_form">
+    <input type="text" size="100" value="Натисніть" onClick="fun('Відбувся клік на текстовому елементі форми');"><br>
+    <input type="text" size="100" id="t_res"><br>
+  </form>
+</body>
+</html>

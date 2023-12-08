@@ -1,0 +1,71 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Таблиця множення</title>
+</head>
+<body>
+    <h1>Перевірка знання таблиці множення</h1>
+    <p id="score">Загальний рахунок: 0</p>
+    <button id="nextTask">Наступне завдання</button>
+    <p id="task">Завдання: </p>
+    <input type="text" id="answer" placeholder="Введіть відповідь">
+    <button id="check">Перевірити</button>
+    <p id="result"></p>
+
+    <script>
+        var taskEl = document.getElementById("task");
+        var answer_user = document.getElementById("answer");
+        var checkButton = document.getElementById("check");
+        var nextTaskButton = document.getElementById("nextTask");
+        var resultElement = document.getElementById("result");
+        var scoreAll = document.getElementById("score");
+
+        var score = 0;
+        var currentTask = 1;
+        var taskCountElement = document.getElementById("taskCount");
+        var maxTasks = 10;
+        var correctAnswer = null;
+
+        function generateRandomNumber() {
+            return Math.floor(Math.random() * 10);
+        }
+
+        function generateTask() {
+         var num1 = generateRandomNumber();
+         var num2 = generateRandomNumber();
+         taskEl.textContent = `Завдання ${currentTask} / ${maxTasks}: ${num1} x ${num2}`;
+         correctAnswer = num1 * num2;
+         answer_user.value = "";
+         answer_user.focus();
+        }
+
+        function checkAnswer() {
+            var userAnswer = parseInt(answer_user.value, 10);
+            if (userAnswer === correctAnswer) {
+                score++;
+                scoreAll.textContent = `Загальний рахунок: ${score}`;
+                resultElement.textContent = "Правильно!";
+            } else {
+                resultElement.textContent = `Неправильно. Правильна відповідь: ${correctAnswer}`;
+            }
+
+            if (currentTask < maxTasks) {
+                currentTask++;
+                taskCountElement.textContent = `Завдання ${currentTask} / ${maxTasks}`;
+
+            } else {
+                nextTaskButton.disabled = true;
+                resultElement.textContent = `Ваш результат: ${score} / ${maxTasks}`;
+            }
+        }
+
+        nextTaskButton.addEventListener("click", generateTask);
+        checkButton.addEventListener("click", checkAnswer);
+
+        generateTask();
+    </script>
+</body>
+</html>

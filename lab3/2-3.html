@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .keyboard {
+      display: grid;
+      grid-template-columns: repeat(10, 50px);
+      grid-template-rows: repeat(3, 50px);
+      gap: 5px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="keyboard" class="keyboard"></div>
+<textarea id="inputText" cols="30" rows="10"></textarea>
+<button onclick="clearField()">Очистити поле</button>
+<button onclick="toggleLayout()">Змінити розклад</button>
+
+<script>
+  var alphabetUkr = ['а', 'б', 'в', 'г', 'д', 'е', 'є', 'и', 'і', 'ї'];
+  var alphabetEng = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'];
+  var currentLayout = alphabetUkr;
+
+  function clearField() {
+    document.getElementById('inputText').value = '';
+  }
+
+  function generateKeyboard(layout) {
+    var keyboard = document.getElementById('keyboard');
+    keyboard.innerHTML = '';
+
+    layout.forEach(varter => {
+      var button = document.createElement('button');
+      button.textContent = varter;
+      button.onclick = function () {
+        document.getElementById('inputText').value += varter;
+      };
+      keyboard.appendChild(button);
+    });
+  }
+
+  
+
+  function toggleLayout() {
+    currentLayout = (currentLayout === alphabetUkr) ? alphabetEng : alphabetUkr;
+    generateKeyboard(currentLayout);
+  }
+
+  generateKeyboard(alphabetUkr);
+</script>
+
+</body>

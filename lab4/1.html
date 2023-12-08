@@ -1,0 +1,185 @@
+
+<head>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #868484;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #424242;
+        }
+
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<form id="quizForm">
+    <h2>Питання 1: Яка мова використовується для програмування на веб-сторінках?</h2>
+    <ul>
+        <li><input type="radio" name="q1" value="0"> PHP</li>
+        <li><input type="radio" name="q1" value="1"> JavaScript</li>
+        <li><input type="radio" name="q1" value="0"> Python</li>
+        <li><input type="radio" name="q1" value="0"> Java</li>
+    </ul>
+    <h2>Питання 2: Які з цих опцій є правильними HTML тегами?</h2>
+    <ul>
+        <li><input type="checkbox" name="q2" value="1"> &lt;p&gt;</li>
+        <li><input type="checkbox" name="q2" value="0"> &lt;div&gt;</li>
+        <li><input type="checkbox" name="q2" value="1"> &lt;a&gt;</li>
+        <li><input type="checkbox" name="q2" value="0"> &lt;span&gt;</li>
+    </ul>
+    <h2>Питання 3: Які типи даних не існують в JavaScript?</h2>
+    <select name="q3" multiple>
+        <option value="0">String</option>
+        <option value="0">Number</option>
+        <option value="1">Boolean</option>
+        <option value="1">Float</option>
+    </select>
+    <h2>Питання 4: Які з поданих фреймворків використовуються для розробки веб-інтерфейсів?</h2>
+    <select name="q4" multiple>
+        <option value="1">React</option>
+        <option value="0">Express</option>
+        <option value="1">Angular</option>
+        <option value="0">Django</option>
+    </select>
+    <h2>Питання 5: Як правильно оголосити змінну в JavaScript?</h2>
+    <input type="text" name="q5">
+    <h2>Питання 6: Які з наступних подій спрацьовують на елементі HTML?</h2>
+    <ul>
+        <li><input type="checkbox" name="q6" value="1"> click</li>
+        <li><input type="checkbox" name="q6" value="1"> mouseover</li>
+        <li><input type="checkbox" name="q6" value="0"> keypress</li>
+        <li><input type="checkbox" name="q6" value="0"> scroll</li>
+    </ul>
+    <h2>Питання 7: Які з наступних виразів є правильними в JavaScript?</h2>
+    <ul>
+        <li><input type="radio" name="q7" value="1"> var x = 10;</li>
+        <li><input type="radio" name="q7" value="0"> x := 10;</li>
+        <li><input type="radio" name="q7" value="1"> let y = 'Hello';</li>
+        <li><input type="radio" name="q7" value="0"> y = 'Hello';</li>
+    </ul>
+    <button type="button" onclick="calculateScore()">Подати відповіді</button>
+</form>
+
+<div id="results" class="result"></div>
+
+<script>
+    function calculateScore() {
+        //відповіді
+        const form = document.getElementById('quizForm');
+        const answers = new FormData(form);
+
+        //зберігання балів
+        const scores = {
+            q1: 0,
+            q2: 0,
+            q3: 0,
+            q4: 0,
+            q5: 0,
+            q6: 0,
+            q7: 0
+        };
+
+        //бали для кожного питання
+        scores.q1 = parseInt(answers.get('q1'));
+        scores.q2 = calculateCheckboxScore(answers.getAll('q2'), 2);
+        scores.q3 = calculateSelectScore(answers.getAll('q3'), 2);
+        scores.q4 = calculateSelectScore(answers.getAll('q4'), 2);
+        scores.q5 = answers.get('q5') ? 1 : 0;
+        scores.q6 = calculateCheckboxScore(answers.getAll('q6'), 2);
+        scores.q7 = parseInt(answers.get('q7'));
+        displayResults(scores);
+    }
+
+    function calculateCheckboxScore(selectedOptions, correctCount) {
+        const selectedCount = selectedOptions.length;
+        const correctSelected = selectedOptions.filter(option => option === '1').length;
+
+        if (selectedCount === correctCount && correctSelected === correctCount) {
+            return 2;
+        } else if (correctSelected > 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    function calculateSelectScore(selectedOptions, correctCount) {
+        const selectedCount = selectedOptions.length;
+        const correctSelected = selectedOptions.filter(option => option === '1').length;
+
+        if (selectedCount === correctCount && correctSelected === correctCount) {
+            return 2;
+        } else {
+            return 0;
+        }
+    }
+
+    function displayResults(scores) {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = '<h2>Результати тестування</h2>';
+
+        const table = document.createElement('table');
+        table.innerHTML = `
+            <tr>
+                <th>Питання</th>
+                <th>Обрані варіанти відповіді</th>
+                <th>Отриманий бал</th>
+            </tr>
+            <tr>
+                <td>Питання 1</td>
+                <td>${scores.q1}</td>
+                <td>${scores.q1}</td>
+            </tr>
+            <tr>
+                <td>Питання 2</td>
+                <td>${scores.q2}</td>
+                <td>${scores.q2}</td>
+            </tr>
+            <tr>
+                <td>Питання 3</td>
+                <td>${scores.q3}</td>
+                <td>${scores.q3}</td>
+            </tr>
+            <tr>
+                <td>Питання 4</td>
+                <td>${scores.q4}</td>
+                <td>${scores.q4}</td>
+            </tr>
+            <tr>
+                <td>Питання 5</td>
+                <td>${scores.q5}</td>
+                <td>${scores.q5}</td>
+            </tr>
+            <tr>
+                <td>Питання 6</td>
+                <td>${scores.q6}</td>
+                <td>${scores.q6}</td>
+            </tr>
+            <tr>
+                <td>Питання 7</td>
+                <td>${scores.q7}</td>
+                <td>${scores.q7}</td>
+            </tr>
+            <tr>
+                <th colspan="2">Загальний бал</th>
+                <th>${scores.q1 + scores.q2 + scores.q3 + scores.q4 + scores.q5 + scores.q6 + scores.q7}</th>
+            </tr>
+        `;
+
+        resultsDiv.appendChild(table);
+    }
+</script>
+
+</body>
+</html>

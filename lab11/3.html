@@ -1,0 +1,63 @@
+
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+
+<button id="addBackBtn">.addBack()</button>
+<button id="isBtn">.is()</button>
+<button id="parentsUntilBtn">.parentsUntil()</button>
+<button id="contentsBtn">.contents()</button>
+<button id="nextBtn">.next()</button>
+
+<div id="contentsExample">
+    <p>Це приклад вмісту.</p>
+</div>
+
+<div id="parent1">
+    <div id="parent2">
+        <button id="childBtn">parent units</button>
+    </div>
+</div>
+
+<div class="first">Перший елемент</div>
+<div class="second">Другий елемент</div>
+<div class="">Другий елемент</div>
+
+<script>
+    $(document).ready(function () {
+        // .addBack()
+        $('#addBackBtn').click(function () {
+            $('.first').css('color', 'red').addBack().css('border', '2px solid blue');
+        });
+
+        // .is()
+        $('#isBtn').mouseover(function () {
+            if ($(this).is(':hover')) {
+                alert('Курсор на кнопці!');
+            } else {
+                alert('Курсор не на кнопці.');
+            }
+        });
+
+        // .parentsUntil()
+        $('#parentsUntilBtn').click(function () {
+            $('#childBtn').parentsUntil('#parent1').css('border', '2px solid red');
+        });
+
+        // .contents()
+        $('#contentsBtn').click(function () {
+            var contents = $('#contentsExample').contents();
+            alert('Кількість елементів в #contentsExample: ' + contents.length);
+        });
+
+        // .next()
+        $('#nextBtn').click(function () {
+            $('button').next().css('color', 'green').addBack().css('border', '2px solid blue');
+        });
+    });
+</script>
+
+</body>
+</html>

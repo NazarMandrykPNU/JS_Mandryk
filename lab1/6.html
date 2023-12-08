@@ -1,0 +1,41 @@
+
+<HTML>
+    <HEAD>
+    <SCRIPT LANGUAGE='JavaScript'>
+    var continent = ["Африка", "Азія", "Європа", "Північна Америка", "Південна Америка", "Океанія", "Антарктида"];
+    var density = [45, 150, 72, 22, 25, 4, 0.00008]; //дані взято з мережі
+    var area = [30.37, 44.58, 10.18, 24.71, 17.84, 9.01, 14.0]; 
+    var selectedContinentIndex;
+    
+    function fun1() {
+      var enteredContinent = document.entryForm.entry.value;
+      selectedContinentIndex = continent.indexOf(enteredContinent);
+      if (selectedContinentIndex !== -1) {
+
+        document.entryForm.output.value = `Густина населення: ${density[selectedContinentIndex]}, Площа: ${area[selectedContinentIndex]} `;
+      } else {
+        document.entryForm.output.value = 'Континент не знайдений,можливі континенти: "Африка", "Азія", "Європа", "Північна Америка", "Південна Америка", "Океанія", "Антарктида" ';
+      }
+    }
+    
+    function fun2() {
+      if (selectedContinentIndex !== undefined) {
+        var result = density[selectedContinentIndex] * area[selectedContinentIndex];
+        document.entryForm.output.value = `Добуток густини населення : ${result.toFixed(2)}`;
+      } else {
+        document.entryForm.output.value = 'Спочатку введіть дані про континент за допомогою кнопки "Густина і площа"';
+      }
+    }
+    </SCRIPT>
+    </HEAD>
+    <BODY>
+    <FORM NAME="entryForm">
+      Введіть назву континенту:
+      <INPUT TYPE="text" NAME="entry">
+      <INPUT TYPE="button" VALUE="Густина і площа" onClick="fun1()">
+      <INPUT TYPE="button" VALUE="Населення" onClick="fun2()">
+      <BR>
+      <INPUT TYPE="text" SIZE="70" NAME="output">
+    </FORM>
+    </BODY>
+    </HTML>

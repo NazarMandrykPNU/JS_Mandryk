@@ -1,0 +1,39 @@
+
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    #animated-box {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+      position: relative;
+    }
+  </style>
+</head>
+<body>
+
+<div id="animated-box"></div>
+
+<script>
+  $(document).ready(function() {
+    var properties = {
+      left: '300px',
+      top: '200px',
+      width: '200px'
+    };
+
+    var animationOptions = {
+      duration: 2000,  
+      easing: 'linear', 
+      complete: function() {
+        alert('complete().duration - 2000,easing - leinear'); 
+      }
+    };
+
+    $('#animated-box').animate(properties, animationOptions);
+  });
+</script>
+
+</body>
+</html>

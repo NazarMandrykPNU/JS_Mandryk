@@ -1,0 +1,59 @@
+
+<html>
+<head>
+    <script>
+        function Info_() {
+        console.info("Інформація");
+        }
+
+        function Warning_() {
+        console.warn("Попередження.");
+        }
+
+        function Error_() {
+        console.error("Помилка.");
+        }
+
+        function Object_() {
+        const obj = { name: "Влад", age: 19 };
+        console.dir(obj);
+        }
+
+        function dir_XML_() {
+        const xmlString = "<note><to>Tove</to><from>Jani</from><heading>Reminder</heading><body>Тест</body></note>";
+        console.dirxml(xmlString);
+        }
+
+        function Time_() {
+        console.time("Час виконання");
+        console.timeEnd("Час виконання");
+        }
+
+        function startProfile() {
+        console.profile("Профіль старт");
+        }
+
+        function stopProfile() {
+        console.profileEnd("Профіль стоп");
+        }
+
+        function assert_() {
+        const value = 5;
+        console.assert(value === 10, "Значення не дорівнює 10");
+        }
+    </script>
+</head>
+<body>
+    <h2>Всі значення виводяться у консоль,не на сторінку</h2>
+
+    <button onclick="Info_()">console.info()</button>
+    <button onclick="Warning_()">console.warn()</button>
+    <button onclick="Error_()">console.error()</button>
+    <button onclick="Object_()">console.dir()</button>
+    <button onclick="dir_XML_()">console.dirxml()</button>
+    <button onclick="Time_()">console.time() / console.timeEnd()</button>
+    <button onclick="startProfile()">console.profile()</button>
+    <button onclick="stopProfile()">console.profileEnd()</button>
+    <button onclick="assert_()">console.assert()</button>
+</body>
+</html>

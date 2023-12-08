@@ -1,0 +1,146 @@
+
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .logo-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+    }
+
+    .logo {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #3498db;
+      border-radius: 50%;
+      transform-origin: center;
+      opacity: 0;
+    }
+
+    #startAnimationBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="logo-container">
+    <div class="logo"></div>
+  </div>
+  <button id="startAnimationBtn">Почати</button>
+
+  <script>
+    const logo = document.querySelector('.logo');
+    const startBtn = document.getElementById('startAnimationBtn');
+
+    startBtn.addEventListener('click', startAnimation);
+
+    function startAnimation() {
+      animate({ duration: 2000, timing: makeEaseOut(bounce), draw: scaleAndFadeIn });
+      animate({ duration: 1000, timing: linear, draw: rotate });
+      animate({ duration: 2000, timing: makeEaseInOut(quad), draw: changeText });
+      animate({ duration: 1000, timing: makeElasticOut(1, 0.3), draw: fadeIn });
+      setTimeout(() => {
+        animate({ duration: 1000, timing: makeEaseInOut(quad), draw: scaleAndFadeOut, onComplete: stopAnimation });
+      }, 5000);
+    }
+
+    function animate({ duration, timing, draw, onComplete }) {
+      const start = performance.now();
+
+      requestAnimationFrame(function animate(time) {
+        let timeFraction = (time - start) / duration;
+        if (timeFraction > 1) timeFraction = 1;
+
+        const progress = timing(timeFraction);
+        draw(progress);
+
+        if (timeFraction < 1) {
+          requestAnimationFrame(animate);
+        } else if (onComplete) {
+          onComplete();
+        }
+      });
+    }
+
+    function scaleAndFadeIn(progress) {
+      logo.style.transform = `scale(${1 + 0.5 * progress})`;
+      logo.style.opacity = progress;
+    }
+
+    function rotate(progress) {
+      logo.style.transform = `rotate(${360 * progress}deg)`;
+    }
+
+    function changeText(progress) {
+      const text = progress < 0.5 ? 'Інженерія програмного Забезпечення' : 'Тисніть щоб зупинити';
+      logo.textContent = text;
+    }
+
+    function fadeIn(progress) {
+      logo.style.transform = `translateX(${progress * 200}px)`;
+      logo.style.opacity = progress;
+    }
+
+    function scaleAndFadeOut(progress) {
+      logo.style.transform = `scale(${1 - 0.5 * progress})`;
+      logo.style.opacity = 1 - progress;
+    }
+
+    function stopAnimation() {
+      logo.textContent = 'Зупинено';
+    }
+
+    function makeEaseOut(timing) {
+      return function(timeFraction) {
+        return 1 - timing(1 - timeFraction);
+      };
+    }
+
+    function makeEaseInOut(timing) {
+      return function(timeFraction) {
+        if (timeFraction < 0.5) {
+          return timing(2 * timeFraction) / 2;
+        } else {
+          return (2 - timing(2 * (1 - timeFraction))) / 2;
+        }
+      };
+    }
+
+    function makeElasticOut(x, y) {
+      return function(timeFraction) {
+        return (
+          Math.pow(2, -10 * timeFraction) * Math.sin((timeFraction - x / 4) * (2 * Math.PI) / y) + 1
+        );
+      };
+    }
+
+    function linear(timeFraction) {
+      return timeFraction;
+    }
+
+    function quad(timeFraction) {
+      return Math.pow(timeFraction, 2);
+    }
+
+    function bounce(timeFraction) {
+      for (let a = 0, b = 1; true; a += b, b /= 2) {
+        if (timeFraction >= (7 - 4 * a) / 11) {
+          return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+        }
+      }
+    }
+  </script>
+</body>
+</html>

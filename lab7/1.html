@@ -1,0 +1,54 @@
+
+<html>
+<body>
+
+  <label for="sequenceInput">Введіть послідовність чисел:</label>
+  <input type="text" id="sequenceInput">
+  <button onclick="reverseNumbers()">Обернути числа</button>
+  <p id="result1_1"></p>
+
+  <label for="numbersArrayInput">Введіть масив чисел:</label>
+  <input type="text" id="numbersArrayInput">
+  <button onclick="no_zeros()">Вилучити нулі</button>
+  <p id="result1_2"></p>
+
+  <label for="textInput">Введіть текст:</label>
+  <input type="text" id="textInput">
+  <button onclick="reverser()">Обернути текст</button>
+  <p id="result1_3"></p>
+
+  <label for="replaceInput">Введіть текст для заміни:</label>
+  <input type="text" id="replaceInput" value="Я не люблю морозиво">
+  <button onclick="replace__()">Замінити слова і пробіли</button>
+  <p id="result1_4"></p>
+
+  <script>
+    function reverseNumbers() {
+      var sequence = document.getElementById('sequenceInput').value;
+      var reversedSequence = sequence.split('').reverse().join('');
+      document.getElementById('result1_1').innerHTML = "1.1: " + reversedSequence;
+    }
+
+    function no_zeros() {
+      var numbersArray = document.getElementById('numbersArrayInput').value.split(',').map(Number);
+      var modifiedArray = numbersArray.map(function(number) {
+        return number.toString().replace(/0/g, '');
+      });
+      document.getElementById('result1_2').innerHTML = "1.2: " + modifiedArray;
+    }
+
+    function reverser() {
+      var text = document.getElementById('textInput').value;
+      var reversedText = text.split('').reverse().join('');
+      document.getElementById('result1_3').innerHTML = "1.3: " + reversedText;
+    }
+
+    function replace__() {
+      var inputText = document.getElementById('replaceInput').value;
+      var modifiedText = inputText.replace(/(\S+)\s+(\S+)/, "$2 $1").replace(/\s/g, ',');
+      document.getElementById('result1_4').innerHTML = "1.4: " + modifiedText;
+    }
+  </script>
+
+</body>
+</html>

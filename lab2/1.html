@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Календар</title>
+</head>
+<body>
+
+    <div>
+        Дата<p id="date"></p>
+        Час<p id="time"></p>
+    </div>
+
+    <script>
+        function updateCalendar() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth() + 1; // Місяці починаються з 0, тому додаємо 1
+            var day = now.getDate();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+
+            // Форматуємо числа, щоб завжди було дві цифри
+            month = month < 10 ? '0' + month : month;
+            day = day < 10 ? '0' + day : day;
+            hour = hour < 10 ? '0' + hour : hour;
+            minute = minute < 10 ? '0' + minute : minute;
+            second = second < 10 ? '0' + second : second;
+
+            var formattedDate = year + ':' + month + ':' + day;
+            var formattedTime = hour + ':' + minute + ':' + second;
+
+            // Вставляємо сформатовану дату та час у відповідні елементи
+            document.getElementById('date').innerHTML = formattedDate;
+            document.getElementById('time').innerHTML = formattedTime;
+        }
+
+        // Оновлюємо календар щосекунди
+        setInterval(updateCalendar, 1000);
+    </script>
+
+</body>
+</html>

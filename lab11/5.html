@@ -1,0 +1,33 @@
+
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div id="parentElement">
+        <div id="childElement">Це дочірній елемент(вивід у консолі)</div>
+    </div>
+<div id="result"></div>
+
+<script>
+  $(document).ready(function() {
+
+    var myArray = ["яблуко", "банан", "апельсин", "груша", "кавун"];
+
+    // inArray()
+    var index = $.inArray("апельсин", myArray);
+    if (index !== -1) {
+      $("#result").append("<p>індекс апельсина: " + index + "</p>");
+    } else {
+      $("#result").append("<p>апельсина немаэ</p>");
+    }
+
+     // contains()
+     var parentElement = document.getElementById('parentElement');
+            var childElement = document.getElementById('childElement');
+            console.log("$.contains(parentElement, childElement): " + $.contains(parentElement, childElement));
+  });
+</script>
+
+</body>
+</html>

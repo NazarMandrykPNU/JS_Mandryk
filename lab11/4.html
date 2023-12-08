@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Завдання 4 - Використання методу .filter()</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <button id="applyStylesForClass">Застосувати стилі для класу</button>
+    <button id="applyStylesForThirdLi">Застосувати стилі для кожного третього елементу <li></button>
+    <ul>
+        <li>Елемент 1</li>
+        <li>Елемент 2</li>
+        <li>Елемент 3</li>
+        <li>Елемент 4</li>
+        <li>Елемент 5</li>
+        <li>Елемент 6</li>
+        <li>Елемент 7</li>
+    </ul>
+    <div class="class_">Елемент класу</div>
+    <div class="class_">Елемент класу</div>
+    <div class="class_">Елемент класу</div>
+
+    <script>
+        $(document).ready(function() {
+            $("#applyStylesForClass").click(function() {
+                $(".class_").filter(function() {
+                    return true;
+                }).css({
+                    backgroundColor: "red",
+                    color: "blue",
+                    fontWeight: "bold",
+                });
+                $(".class_").text("modify");
+            });
+
+        
+            $("#applyStylesForThirdLi").click(function() {
+                $("li:nth-child(3n)").css({
+                    backgroundColor: "gray",
+                    color: "blue",
+                    fontWeight: "bold",
+                });
+                $("li:nth-child(3n)").text("modify");
+            });
+        });
+    
+    </script>
+</body>
+</html>

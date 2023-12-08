@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Завдання 2.1 і 2.2</title>
+</head>
+<body>
+
+  <h2>2.1 - 2.2.</h2>
+
+  <button onclick="showCurrentDateTime()">Виконати завдання 2.1</button>
+  <button onclick="showDayOfWeekInfo()">Виконати завдання 2.2</button>
+
+  <script>
+    function showCurrentDateTime() {
+      const currentDate = new Date();
+      const months = [
+        "січня", "лютого", "березня", "квітня", "травня", "червня",
+        "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"
+      ];
+      const daysOfWeek = [
+        "неділя", "понеділок", "вівторок", "середа", "четвер", "п'ятниця", "субота"
+      ];
+
+      const day = currentDate.getDate();
+      const month = months[currentDate.getMonth()];
+      const year = currentDate.getFullYear();
+      const dayOfWeek = daysOfWeek[currentDate.getDay()];
+      const hours = currentDate.getHours();
+      const minutes = currentDate.getMinutes();
+
+      const outputString = `Дата: ${day} ${month} ${year} року\nДень тижня: ${dayOfWeek}\nЧас: ${hours}:${minutes}`;
+
+      alert(outputString);
+    }
+
+    function getDayOfWeekInfo(date) {
+      const daysOfWeekInfo = [
+        { dayNumber: 1, dayName: "понеділок" },
+        { dayNumber: 2, dayName: "вівторок" },
+        { dayNumber: 3, dayName: "середа" },
+        { dayNumber: 4, dayName: "четвер" },
+        { dayNumber: 5, dayName: "п'ятниця" },
+        { dayNumber: 6, dayName: "субота" },
+        { dayNumber: 0, dayName: "неділя" }
+      ];
+
+      const dayNumber = date.getDay();
+      const dayInfo = daysOfWeekInfo.find(info => info.dayNumber === dayNumber);
+
+      return dayInfo;
+    }
+
+    function showDayOfWeekInfo() {
+      const currentDate = new Date();
+      const dayInfo = getDayOfWeekInfo(currentDate);
+
+      const outputString = `Номер тижня: ${dayInfo.dayNumber}\nНазва дня тижня: ${dayInfo.dayName}`;
+      alert(outputString);
+    }
+  </script>
+   <h2>2.3</h2>
+   <label for="daysInput">Введіть кількість днів (позитивне або від'ємне): </label>
+   <input type="number" id="daysInput">
+   <button onclick="findDate()">Знайти дату</button>
+   <p id="result"></p>
+   <script>
+       function findDate() {
+           const daysInput = parseInt(document.getElementById("daysInput").value);
+           const currentDate = new Date();
+           const resultDisplay = document.getElementById("result");
+
+           if (!isNaN(daysInput)) {
+               const targetDate = new Date(currentDate);
+               targetDate.setDate(currentDate.getDate() + daysInput);
+
+               let resultMessage = "Дата: " + targetDate.toLocaleDateString();
+               if (daysInput < 0) {
+                   resultMessage += " (минула дата)";
+               } else if (daysInput > 0) {
+                   resultMessage += " (майбутня дата)";
+               } else {
+                   resultMessage += " (поточна дата)";
+               }
+
+               resultDisplay.textContent = resultMessage;
+           } else {
+               resultDisplay.textContent = "Некоректне значення днів.";
+           }
+       }
+   </script>
+     <h2>2.5</h2>
+
+     <button onclick="showSecondsInfo()">Вивести інформацію про секунди</button>
+   
+     <p id="result2"></p>
+   
+     <script>
+       function getSecondsInfo() {
+         const now = new Date();
+         const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+         const secondsPassed = Math.floor((now - startOfDay) / 1000);
+   
+         const startOfNextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+         const secondsUntilNextDay = Math.floor((startOfNextDay - now) / 1000);
+   
+         return {
+           secondsPassed,
+           secondsUntilNextDay,
+         };
+       }
+   
+       function showSecondsInfo() {
+         const resultOutput = document.getElementById("result2");
+   
+         const secondsInfo = getSecondsInfo();
+   
+         const outputString = `Кількість секунд, яка пройшла від початку сьогоднішнього дня: ${secondsInfo.secondsPassed}\nКількість секунд до початку наступного дня: ${secondsInfo.secondsUntilNextDay}`;
+   
+         resultOutput.textContent = outputString;
+       }
+    </script>
+      <h2>2.6</h2>
+      <label for="dateTimeInput">Введіть дату та час (дд.мм.р год:хв): </label>
+      <input type="text" id="dateTimeInput">
+      <button onclick="formatDateDifference()">Форматувати</button>
+      <p id="result3"></p>
+      <script>
+          function formatDateDifference() {
+              const dateTimeInput = document.getElementById("dateTimeInput").value;
+              const resultDisplay = document.getElementById("result3");
+              const parts = dateTimeInput.split(' ');
+              const dateParts = parts[0].split('.');
+              const timeParts = parts[1].split(':');
+              const inputDate = new Date(`${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${timeParts[0]}:${timeParts[1]}`);
+              const now = new Date();
+              const differenceInSeconds = Math.floor((now - inputDate) / 1000);
+              if (differenceInSeconds < 60) {
+                  resultDisplay.textContent = `${differenceInSeconds} сек. назад`;
+              } else if (differenceInSeconds < 3600) {
+                  const minutes = Math.floor(differenceInSeconds / 60);
+                  resultDisplay.textContent = `${minutes} хв. назад`;
+              } else {
+                  resultDisplay.textContent = inputDate.toLocaleString();
+              }
+          }
+      </script>
+
+</body>
+</html>

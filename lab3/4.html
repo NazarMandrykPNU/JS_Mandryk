@@ -1,0 +1,40 @@
+
+<html>
+<body>
+    <div class="buttons">
+        <button id="prevButton">Назад</button>
+        <button id="nextButton">Вперед</button>
+    </div>
+    <img id="imageDisplay" src="">
+    
+
+    <script>
+        const imageFiles = ['../images/image1.jpg', '../images/image2.jpg', '../images/image3.jpg'];
+        
+        let currentIndex = 0;
+
+        const imageDisplay = document.getElementById("imageDisplay");
+        const prevButton = document.getElementById("prevButton");
+        const nextButton = document.getElementById("nextButton");
+
+        function displayCurrentImage() {
+            imageDisplay.src = imageFiles[currentIndex];
+        }
+
+        function showPreviousImage() {
+            currentIndex = (currentIndex - 1 + imageFiles.length) % imageFiles.length;
+            displayCurrentImage();
+        }
+
+        function showNextImage() {
+            currentIndex = (currentIndex + 1) % imageFiles.length;
+            displayCurrentImage();
+        }
+
+        prevButton.addEventListener("click", showPreviousImage);
+        nextButton.addEventListener("click", showNextImage);
+
+        displayCurrentImage();
+    </script>
+</body>
+</html>

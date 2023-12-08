@@ -1,0 +1,62 @@
+<html>
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+    </style>
+    <script>
+        var rows, columns;
+
+        function buildMatrix() {
+            rows = parseInt(document.getElementById("t_str").value);
+            columns = parseInt(document.getElementById("t_stb").value);
+            var matrixTable = "<table>\n";
+
+            for (let i = 1; i <= rows; i++) {
+                matrixTable += "<tr>\n";
+                for (var j = 1; j <= columns; j++) {
+                    const value = (2 * i) / j;
+                    matrixTable += `<td><input type="text" id="_${i}_${j}" value="${value}"></td>\n`;
+                }
+                matrixTable += "</tr>\n";
+            }
+
+            matrixTable += "</table>";
+            document.getElementById("matrix_div").innerHTML = matrixTable;
+        }
+
+        function calculate() {
+            var rowSum = 0;
+            for (var j = 1; j <= columns; j++) {
+                rowSum += parseInt(document.getElementById(`_2_${j}`).value);
+            }
+            alert(`Сума елементів другого рядка: ${rowSum}`);
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <table>
+            <tr>
+                <td>Кількість рядків</td>
+                <td><input type="text" id="t_str" value="5"></td>
+            </tr>
+            <tr>
+                <td>Кількість стовпців</td>
+                <td><input type="text" id="t_stb" value="5"></td>
+            </tr>
+            <tr>
+                <td><input type="button" onClick="buildMatrix();" value="Побудувати матрицю"></td>
+                <td><input type="button" onClick="calculate();" value="Розрахувати суму 2 рядка"></td>
+            </tr>
+        </table>
+    </form>
+    <div id="matrix_div"></div>
+</body>
+</html>

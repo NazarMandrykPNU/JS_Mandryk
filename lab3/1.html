@@ -1,0 +1,31 @@
+<html>
+<body>
+    <label for="length">Довжина:</label>
+    <input type="text" id="length" placeholder="Введіть довжину" oninput="calculate()"><br><br>
+
+    <label for="width">Ширина:</label>
+    <input type="text" id="width" placeholder="Введіть ширину" oninput="calculate()"><br><br>
+
+    <p id="result">Результат:</p>
+    <script>
+        function calculate() {
+            var length = parseInt(document.getElementById("length").value);
+            var width = parseInt(document.getElementById("width").value);
+
+            if (!isNaN(length) && !isNaN(width)) {
+                var perimeter = 2 * (length + width);
+                var area = length * width;
+                var diagonal = Math.sqrt(length * length + width * width);
+
+                var resultText = "Периметр: " + perimeter.toFixed(2) + "<br>";
+                resultText += "Площа: " + area.toFixed(2) + "<br>";
+                resultText += "Довжина діагоналі: " + diagonal.toFixed(2);
+
+                document.getElementById("result").innerHTML = resultText;
+            } else {
+                document.getElementById("result").innerHTML = "Невірні значення";
+            }
+        }
+    </script>
+</body>
+</html>

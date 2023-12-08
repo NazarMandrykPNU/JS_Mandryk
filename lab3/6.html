@@ -1,0 +1,62 @@
+
+<html>
+<head>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    ul ul {
+      display: none;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+    <h2>Виконано за допомогою списків</h2>
+  <ul id="tree">
+    <li class="folder">fruits
+      <ul>
+        <li>apple</li>
+        <li>pineapple</li>
+        <li>apricot</li>
+        <li>pear</li>
+        <li>lemon</li>
+      </ul>
+    </li>
+    <li class="folder">vegetables
+      <ul>
+        <li>potatoes</li>
+        <li>beetroot</li>
+        <li>carrots</li>
+        <li>pear</li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var tree = document.getElementById('tree');
+
+      tree.addEventListener('click', function(e) {
+        var target = e.target;
+        if (target.tagName === 'LI') {
+          var childNodes = target.children;
+          for (var i = 0; i < childNodes.length; i++) {
+            if (childNodes[i].tagName === 'UL') {
+              if (childNodes[i].style.display === 'none') {
+                childNodes[i].style.display = 'block';
+              } else {
+                childNodes[i].style.display = 'none';
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

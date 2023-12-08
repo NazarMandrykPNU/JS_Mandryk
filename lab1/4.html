@@ -1,0 +1,26 @@
+<html>
+<head>
+<script>
+function fun(){
+    var x,y;
+    x = parseInt(main_form.x.value);
+    y = parseInt(main_form.y.value);
+    if (x > 0 && y > 0) {
+        var result = x + y;
+      } else if (x < 3 && y < 4) {
+        var result = Math.pow(x, 2) + Math.pow(y, 2);
+      } else {
+        var result = Math.pow(x, 3);
+      }
+      main_form.result.value = "" + result;
+}
+</script>
+<body>
+    <form id = "main_form">
+    x<input type="text" id = "x" value="4"><br>
+    y<input type="text" id = "y" value="15"><br>
+    Результат<input type="text" id = "result" value=""><br>
+    <input type = "button" onClick = "fun();" value = "Розрахувати">
+    </form>
+ </body>
+    

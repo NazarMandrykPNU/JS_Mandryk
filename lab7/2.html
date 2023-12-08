@@ -1,0 +1,97 @@
+
+<html>
+<body>
+
+  <label for="string1">Введіть перший рядок:</label>
+  <input type="text" id="string1">
+  <label for="string2">Введіть другий рядок:</label>
+  <input type="text" id="string2">
+  <button onclick="compareLength()">Порівняти довжину</button>
+  <p id="result2_1"></p>
+
+  <label for="stringIndex">Введіть рядок:</label>
+  <input type="text" id="stringIndex">
+  <label for="charToFind">Введіть символ для пошуку:</label>
+  <input type="text" id="charToFind">
+  <button onclick="findCharIndices()">Знайти індекси символу</button>
+  <p id="result2_2"></p>
+
+  <label for="upperCaseInput">Введіть рядок для перетворення в верхній регістр:</label>
+  <input type="text" id="upperCaseInput">
+  <button onclick="firstCharToUpperCase()">Верхній регістр першого символу</button>
+  <p id="result2_3"></p>
+
+  <label for="vowelsInput">Введіть рядок для підрахунку голосних:</label>
+  <input type="text" id="vowelsInput">
+  <button onclick="countVowels()">Підрахунок голосних</button>
+  <p id="result2_4"></p>
+
+  <label for="spamInput">Введіть рядок для перевірки на спам:</label>
+  <input type="text" id="spamInput">
+  <button onclick="checkForSpam()">Перевірка на спам</button>
+  <p id="result2_5"></p>
+
+  <label for="truncateInput">Введіть рядок для скорочення:</label>
+  <input type="text" id="truncateInput">
+  <label for="maxLength">Введіть максимальну довжину:</label>
+  <input type="number" id="maxLength">
+  <button onclick="truncateString()">Скорочення рядка</button>
+  <p id="result2_6"></p>
+
+  <script>
+    function compareLength() {
+      var string1 = document.getElementById('string1').value;
+      var string2 = document.getElementById('string2').value;
+      var result = string1.length > string2.length ? 1 : (string1.length < string2.length ? -1 : 0);
+      document.getElementById('result2_1').innerHTML = "2.1: " + result;
+    }
+
+    function findCharIndices() {
+      var inputString = document.getElementById('stringIndex').value;
+      var charToFind = document.getElementById('charToFind').value;
+      var indices = [];
+      var count = 0;
+
+      for (var i = 0; i < inputString.length; i++) {
+        if (inputString[i] === charToFind) {
+          indices.push(i);
+          count++;
+        }
+      }
+
+      document.getElementById('result2_2').innerHTML = "2.2: Індекси: " + indices.join(', ') + "<br>Кількість: " + count;
+    }
+
+    function firstCharToUpperCase() {
+      var inputString = document.getElementById('upperCaseInput').value;
+      var result = inputString.charAt(0).toUpperCase() + inputString.slice(1);
+      document.getElementById('result2_3').innerHTML = "2.3: " + result;
+    }
+
+    function countVowels() {
+  var inputString = document.getElementById('vowelsInput').value;
+  var vowelsCount = inputString.match(/[aаeiouеиіоуAEIOUАЕИОУ]/g);
+  var result = vowelsCount ? vowelsCount.length : 0;
+  document.getElementById('result2_4').innerHTML = "2.4: Кількість голосних: " + result;
+}
+
+
+    function checkForSpam() {
+      var inputString = document.getElementById('spamInput').value.toLowerCase();
+      var spamKeywords = ["100% безкоштовно", "збільшення продажів", "тільки сьогодні", "не видаляйте"];
+      var isSpam = false;
+
+      for (var i = 0; i < spamKeywords.length; i++) {
+        if (inputString.includes(spamKeywords[i].toLowerCase())) {
+          isSpam = true;
+          break;
+        }
+      }
+
+      document.getElementById('result2_5').innerHTML = "2.5: " + isSpam;
+    }
+
+  </script>
+
+</body>
+</html>

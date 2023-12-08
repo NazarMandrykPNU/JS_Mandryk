@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+
+    <label for="dividend">Ділене:</label>
+    <input type="text" id="dividend">
+    
+    <label for="divisor">Дільник:</label>
+    <input type="text" id="divisor">
+
+    <button onclick="calculateRemainder()">Обчислити</button>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateRemainder() {
+            const dividend = parseInt(document.getElementById("dividend").value);
+            const divisor = parseInt(document.getElementById("divisor").value);
+            const remainder = dividend % divisor;
+
+            console.log("Остача від ділення", dividend, "на", divisor, "дорівнює", remainder);
+
+            const zeroRemainder = remainder === 0;
+            console.log("Остача рівна нулю:", zeroRemainder);
+
+            const textArray = ["Перший", "Другий", "Третій"];
+            console.log("Комбінований вивід:", "Масив:", textArray, "Елемент 2:", textArray[1]);
+
+            const resultElement = document.getElementById("result");
+            resultElement.innerHTML = `
+                <p>Остача від ділення ${dividend} на ${divisor} дорівнює ${remainder}</p>
+                <p>Остача рівна нулю: ${zeroRemainder}</p>
+                <p>Комбінований вивід: Масив: ${textArray}, Елемент 2: ${textArray[1]}</p>
+            `;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+<h1>appendTo()</h1>
+<div id="container">
+    <p>Початковий текст</p>
+</div>
+<h1>replaceAll()</h1>
+<div id="old">Старий текст</div>
+<div id="new">Новий текст</div>
+<h1>height;outerHeight()  </h1>
+<div id="box">Цей блок має початкову висоту</div>
+
+<div id="outerBox" style="border: 1px solid black; padding: 10px;">Зовнішній блок</div>
+
+<script>
+    $(document).ready(function () {
+        // .appendTo()
+        $('<span> Додатковий текст</span>').appendTo('#container');
+
+        // .replaceAll()
+        $('#new').replaceAll('#old');
+
+        // .height(функция)
+        $('#box').height(function (index, height) {
+            return height + 50; // Збільшити висоту на 50px
+        });
+
+        // .outerHeight()
+        var outerHeight = $('#outerBox').outerHeight();
+        alert('Зовнішня висота: ' + outerHeight + 'px');
+    });
+</script>
+
+</body>
+</html>
