@@ -1,0 +1,129 @@
+
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            color: #000;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+        }
+
+        #content {
+            width: 400px;
+            margin: 20px;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 10px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul.nav {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+        }
+
+        ul.nav li {
+            position: relative;
+        }
+
+        .nav-btn {
+            background: #000000;
+            text-decoration: none;
+            display: block;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 30px;
+            width: 100%;
+            text-align: left;
+            color: #fff;
+        }
+
+        ul.nav li ul {
+            display: none;
+            padding-left: 20px;
+        }
+
+        ul.nav li ul li {
+            padding: 5px 0;
+        }
+
+        ul.nav li input:checked + button.nav-btn + ul {
+            display: block;
+        }
+
+        ul.nav li input:checked + button.nav-btn {
+            background: #19a722;
+        }
+
+        button.nav-btn:before {
+            content: "\25BC";
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        a#back {
+            text-decoration: none;
+            color: #189e33;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <ul class="nav">
+            <li>
+                <input type="checkbox" id="chk_1">
+                <button class="nav-btn" for="chk_1"> Меню 1</button>
+                <ul>
+                    <li><a class="nav-btn" href="#"> 1</a></li>
+                    <li><a class="nav-btn" href="#"> 2</a></li>
+                    <li><a class="nav-btn" href="#"> 3</a></li>
+                    <li><a class="nav-btn" href="#"> 4</a></li>
+                </ul>
+            </li>
+            <li>
+                <input type="checkbox" id="chk_2">
+                <button class="nav-btn" for="chk_2">Меню 2</button>
+                <ul>
+                    <li><a class="nav-btn" href="#"> 1</a></li>
+                    <li>
+                        <input type="checkbox" id="chk_2_2">
+                        <button class="nav-btn" for="chk_2_2"> 2 - розширене</button>
+                        <ul>
+                            <li><a class="nav-btn" href="#"> 2.1</a></li>
+                            <li><a class="nav-btn" href="#"> 2.2</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="nav-btn" href="#">Меню 3</a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const sectionButtons = document.querySelectorAll('.nav-btn');
+
+        sectionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const listItem = button.parentElement;
+                const subsection = listItem.querySelector('ul');
+
+                if (subsection) {
+                    subsection.style.display = subsection.style.display === 'block' ? 'none' : 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

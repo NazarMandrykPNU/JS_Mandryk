@@ -1,0 +1,170 @@
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-repeat: no-repeat;
+            background-position: top center;
+            background-color: #dfab3b;
+            margin: 40px;
+        }
+
+        .tab-container {
+            margin: 0 auto;
+            width: 80%; 
+            background-color: #eee;
+            border-radius: 0px;
+        }
+
+        .tab-container h4 {
+            font-family: Arial, Helvetica, sans-serif;
+            letter-spacing: -1px;
+            margin-bottom: 10px;
+            font-size: 40px;
+            color: #000000;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .tabContentContainer {
+            padding: 20px;
+        }
+
+        ul.tabs {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            border-radius: 20px; 
+            overflow: hidden;
+        }
+
+        ul.tabs li {
+            flex: 1;
+        }
+
+        ul.tabs li a {
+            background-color: #ff6347;
+            color: #fff;
+            padding: 20px 0; 
+            text-decoration: none;
+            font-size: 24px; 
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            text-align: center;
+            border-bottom: 1px solid #ff6347;
+            display: block;
+            border-radius: 0px; 
+            transition: background-color 0.3s ease; 
+        }
+
+        ul.tabs li a:hover {
+            background-color: #d14836;
+        }
+
+        ul.tabs li a.active {
+            background-color: #fff;
+            color: #ff6347;
+            border-bottom: 1px solid #ff6347;
+        }
+
+        .tab-content {
+            background-color: #f0f0f0;
+            margin-top: 9px;
+            padding: 20px;
+            border-radius: 20px;
+        }
+
+        .tab-content:not(:first-child) {
+            display: none;
+        }
+
+        ul.tabs {
+            margin: 0;
+            padding: 0;
+            margin-bottom: 10px; 
+        }
+
+        .tab-content ul {
+            margin: 0;
+            padding: 0 20px 0 20px;
+        }
+
+        .tab-content ul li {
+            list-style: none;
+            display: block;
+            border-bottom: 1px solid #d6dde0;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .tab-content ul li,
+        .tab-content p {
+            font-size: 20px;
+        }
+
+        .tab-content p {
+            padding-left: 20px;
+        }
+
+        .tab-content ul li:last-child {
+            border-bottom: none;
+        }
+    </style>
+    <title>Task 1</title>
+    <script>
+        function switchTab(newTab, newContent) { 
+            document.getElementById('tabContent1').style.display = 'none'; 
+            document.getElementById('tabContent2').style.display = 'none'; 
+            document.getElementById('tabContent3').style.display = 'none'; 
+            document.getElementById(newContent).style.display = 'block';    
+
+            document.getElementById('tab1').classList.remove('active'); 
+            document.getElementById('tab2').classList.remove('active'); 
+            document.getElementById('tab3').classList.remove('active'); 
+            document.getElementById(newTab).classList.add('active');          
+        }
+    </script>
+</head>
+<body>
+    <div id="tabContainer" class="tab-container">
+        <h4>Оберіть меню</h4>
+        <div class="tabContentContainer">
+            <ul class="tabs">
+                <li><a href="javascript:switchTab('tab1', 'tabContent1');" id="tab1" class="active">Меню 1</a></li>
+                <li><a href="javascript:switchTab('tab2', 'tabContent2');" id="tab2" class="">Меню 2</a></li>
+                <li><a href="javascript:switchTab('tab3', 'tabContent3');" id="tab3" class="">Меню 3</a></li>
+            </ul>
+            <div id="tabContent1" class="tab-content">
+                <p>Меню 1</p>
+                <ul>
+                    <li> 1 а</li>
+                    <li> 2 а</li>
+                    <li> 3 а</li>
+                    <li> 4 а</li>
+                </ul>
+            </div>
+            <div id="tabContent2" class="tab-content">
+                <p>Меню 2</p>
+                <ul>
+                    <li> 1 б</li>
+                    <li> 2 б</li>
+                    <li> 3 б</li>
+                    <li> 4 б</li>
+                </ul>
+            </div>
+            <div id="tabContent3" class="tab-content">
+                <p>Меню 3</p>
+                <ul>
+                    <li> 1 в</li>
+                    <li> 2 в</li>
+                    <li> 3 в</li>
+                    <li> 4 в</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
